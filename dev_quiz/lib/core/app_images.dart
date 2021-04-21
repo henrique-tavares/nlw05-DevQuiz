@@ -7,4 +7,15 @@ class AppImages {
   static String get error => "assets/images/error.png";
   static String get trophy => "assets/images/trophy.png";
   static String get logo => "assets/images/logo.png";
+
+  static String? fromString(String image) => {
+        "hierarchy": AppImages.hierarchy,
+        "data": AppImages.data,
+        "laptop": AppImages.laptop,
+        "blocks": AppImages.blocks,
+        "check": AppImages.check,
+        "error": AppImages.error,
+        "trophy": AppImages.trophy,
+        "logo": AppImages.logo,
+      }[image];
 }

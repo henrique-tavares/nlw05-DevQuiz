@@ -1,34 +1,33 @@
 import 'package:dev_quiz/core/app_colors.dart';
+import 'package:dev_quiz/shared/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-enum LevelButtonWidgetLabel { Facil, Medio, Dificil, Perito }
-
 class LevelButtonWidget extends StatelessWidget {
-  final LevelButtonWidgetLabel label;
+  final Level label;
 
   LevelButtonWidget({Key? key, required this.label}) : super(key: key);
 
   final config = {
-    LevelButtonWidgetLabel.Facil: {
+    Level.facil: {
       "text": "Fácil",
       "color": AppColors.levelButtonFacil,
       "borderColor": AppColors.levelButtonBorderFacil,
       "fontColor": AppColors.levelButtonTextFacil
     },
-    LevelButtonWidgetLabel.Medio: {
+    Level.medio: {
       "text": "Médio",
       "color": AppColors.levelButtonMedio,
       "borderColor": AppColors.levelButtonBorderMedio,
       "fontColor": AppColors.levelButtonTextMedio
     },
-    LevelButtonWidgetLabel.Dificil: {
+    Level.dificil: {
       "text": "Difícil",
       "color": AppColors.levelButtonDificil,
       "borderColor": AppColors.levelButtonBorderDificil,
       "fontColor": AppColors.levelButtonTextDificil
     },
-    LevelButtonWidgetLabel.Perito: {
+    Level.perito: {
       "text": "Perito",
       "color": AppColors.levelButtonPerito,
       "borderColor": AppColors.levelButtonBorderPerito,
