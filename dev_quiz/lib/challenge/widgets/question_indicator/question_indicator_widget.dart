@@ -3,6 +3,12 @@ import 'package:dev_quiz/shared/widgets/progress_indicator/progress_indicator_wi
 import 'package:flutter/material.dart';
 
 class QuestionIndicatorWidget extends StatelessWidget {
+  final int current;
+  final int total;
+
+  const QuestionIndicatorWidget({Key? key, required this.current, required this.total})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,23 +18,48 @@ class QuestionIndicatorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Questão 04",
-                  style: AppTextStyles.body,
+                Container(
+                  height: 30,
+                  width: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.close),
+                    padding: const EdgeInsets.all(0),
+                    iconSize: 20,
+                    color: AppColors.grey,
+                    splashColor: AppColors.black.withOpacity(0.5),
+                    splashRadius: 30,
+                  ),
                 ),
-                Text(
-                  "de 10",
-                  style: AppTextStyles.body,
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Questão ${(current + 1).toString().padLeft(2, '0')}",
+                        style: AppTextStyles.body,
+                      ),
+                      Text(
+                        "de ${total.toString().padLeft(2, '0')}",
+                        style: AppTextStyles.body,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 16,
             ),
             ProgressIndicatorWidget(
-              value: .4,
+              value: (current + 1) / total,
             ),
           ],
         ),
