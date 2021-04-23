@@ -33,14 +33,14 @@ class QuizModel {
   final String icon;
   final Level level;
   final List<QuestionModel> questions;
-  int questionsAnswered;
+  int correctAnswers;
 
   QuizModel({
     required this.title,
     required this.icon,
     required this.level,
     required this.questions,
-    this.questionsAnswered = 0,
+    this.correctAnswers = 0,
   });
 
   Map<String, dynamic> toMap() {
@@ -49,7 +49,7 @@ class QuizModel {
       'icon': icon,
       'level': level.parse,
       'questions': questions.map((x) => x.toMap()).toList(),
-      'questionsAnswered': questionsAnswered,
+      'correctAnswers': correctAnswers,
     };
   }
 
@@ -59,7 +59,7 @@ class QuizModel {
       icon: AppImages.fromString(map['icon'])!,
       level: map['level'].toString().parseLevel,
       questions: List<QuestionModel>.from(map['questions']?.map((x) => QuestionModel.fromMap(x))),
-      questionsAnswered: map['questionsAnswered'],
+      correctAnswers: map['correctAnswers'],
     );
   }
 

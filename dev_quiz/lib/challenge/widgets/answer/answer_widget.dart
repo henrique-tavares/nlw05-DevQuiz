@@ -6,7 +6,7 @@ class AnswerWidget extends StatelessWidget {
   final AnswerModel answer;
   final bool isSelected;
   final bool disabled;
-  final VoidCallback onTap;
+  final ValueChanged<bool> onTap;
 
   AnswerWidget({
     Key? key,
@@ -31,43 +31,48 @@ class AnswerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: disabled ? () {} : onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isSelected ? _selectedColorCard : AppColors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: isSelected ? _selectedBorderCard : AppColors.border),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  answer.title,
-                  style: isSelected ? _selectedTextStyle : AppTextStyles.body,
+    return IgnorePointer(
+      ignoring: disabled,
+      child: GestureDetector(
+        onTap: () {
+          onTap(answer.isRight);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: isSelected ? _selectedColorCard : AppColors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: isSelected ? _selectedBorderCard : AppColors.border),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    answer.title,
+                    style: isSelected ? _selectedTextStyle : AppTextStyles.body,
+                  ),
                 ),
-              ),
-              Container(
-                height: 24,
-                width: 24,
-                decoration: BoxDecoration(
-                  color: isSelected ? _selectedColor : AppColors.white,
-                  border: Border.all(color: isSelected ? _selectedBorder : AppColors.border),
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: isSelected
-                    ? Icon(
-                        _selectedIcon,
-                        size: 16,
-                        color: AppColors.white,
-                      )
-                    : null,
-              )
-            ],
+                Container(
+                  height: 24,
+                  width: 24,
+                  decoration: BoxDecoration(
+                    color: isSelected ? _selectedColor : AppColors.white,
+                    border: Border.all(color: isSelected ? _selectedBorder : AppColors.border),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  child: isSelected
+                      ? Icon(
+                          _selectedIcon,
+                          size: 16,
+                          color: AppColors.white,
+                        )
+                      : null,
+                )
+              ],
+            ),
           ),
         ),
       ),

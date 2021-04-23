@@ -39,14 +39,14 @@ class QuizCardWidget extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      "${quiz.questionsAnswered} de ${quiz.questions.length}",
+                      "${quiz.correctAnswers} de ${quiz.questions.length}",
                       style: AppTextStyles.body11,
                     ),
                   ),
                   Expanded(
                     flex: 2,
                     child: ProgressIndicatorWidget(
-                      value: quiz.questionsAnswered / quiz.questions.length,
+                      value: quiz.correctAnswers / quiz.questions.length,
                     ),
                   ),
                 ],

@@ -2,6 +2,7 @@ import 'package:dev_quiz/challenge/challenge_controller.dart';
 import 'package:dev_quiz/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:dev_quiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:dev_quiz/challenge/widgets/quiz/quiz_widget.dart';
+import 'package:dev_quiz/result/result_page.dart';
 import 'package:dev_quiz/shared/models/question_model.dart';
 import 'package:dev_quiz/shared/models/quiz_model.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +28,14 @@ class _ChallengePageState extends State<ChallengePage> {
     );
   }
 
+  void onSelect(bool value) {
+    challengeController.advanceDisabled = false;
+
+    if (value) {
+      challengeController.correctAnswers++;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +58,7 @@ class _ChallengePageState extends State<ChallengePage> {
         children: widget.quiz.questions
             .map((question) => QuizWidget(
                   question: question,
-                  onSelect: () {
-                    challengeController.advanceDisabled = false;
-                  },
+                  onSelect: onSelect,
                 ))
             .toList(),
         onPageChanged: (page) {
@@ -75,13 +82,31 @@ class _ChallengePageState extends State<ChallengePage> {
                           ? NextButtonWidget.white(
                               label: "Finalizar",
                               onTap: () {
-                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultPage(
+                                      title: widget.quiz.title,
+                                      correctAnswers: challengeController.correctAnswers,
+                                      totalQuestions: widget.quiz.questions.length,
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           : NextButtonWidget.green(
                               label: "Finalizar",
                               onTap: () {
-                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultPage(
+                                      title: widget.quiz.title,
+                                      correctAnswers: challengeController.correctAnswers,
+                                      totalQuestions: widget.quiz.questions.length,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                     )

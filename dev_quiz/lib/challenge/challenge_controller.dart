@@ -12,4 +12,6 @@ class ChallengeController {
   final lastPageNotifier = ValueNotifier<bool>(false);
   bool get lastPage => lastPageNotifier.value;
   set lastPage(bool value) => lastPageNotifier.value = value;
+
+  int correctAnswers = 0;
 }
