@@ -74,54 +74,55 @@ class _ChallengePageState extends State<ChallengePage> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ValueListenableBuilder<bool>(
-              valueListenable: challengeController.lastPageNotifier,
-              builder: (context, value, _) => value
-                  ? ValueListenableBuilder<bool>(
-                      valueListenable: challengeController.advanceDisabledNotifier,
-                      builder: (context, value, _) => value
-                          ? NextButtonWidget.white(
-                              label: "Finalizar",
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ResultPage(
-                                      title: widget.quiz.title,
-                                      correctAnswers: challengeController.correctAnswers,
-                                      totalQuestions: widget.quiz.questions.length,
-                                    ),
+            valueListenable: challengeController.lastPageNotifier,
+            builder: (context, value, _) => value
+                ? ValueListenableBuilder<bool>(
+                    valueListenable: challengeController.advanceDisabledNotifier,
+                    builder: (context, value, _) => value
+                        ? NextButtonWidget.white(
+                            label: "Finalizar",
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ResultPage(
+                                    title: widget.quiz.title,
+                                    correctAnswers: challengeController.correctAnswers,
+                                    totalQuestions: widget.quiz.questions.length,
                                   ),
-                                );
-                              },
-                            )
-                          : NextButtonWidget.green(
-                              label: "Finalizar",
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ResultPage(
-                                      title: widget.quiz.title,
-                                      correctAnswers: challengeController.correctAnswers,
-                                      totalQuestions: widget.quiz.questions.length,
-                                    ),
+                                ),
+                              );
+                            },
+                          )
+                        : NextButtonWidget.green(
+                            label: "Finalizar",
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ResultPage(
+                                    title: widget.quiz.title,
+                                    correctAnswers: challengeController.correctAnswers,
+                                    totalQuestions: widget.quiz.questions.length,
                                   ),
-                                );
-                              },
-                            ),
-                    )
-                  : ValueListenableBuilder<bool>(
-                      valueListenable: challengeController.advanceDisabledNotifier,
-                      builder: (context, value, _) => value
-                          ? NextButtonWidget.white(
-                              label: "Pular",
-                              onTap: nextPage,
-                            )
-                          : NextButtonWidget.green(
-                              label: "Avançar",
-                              onTap: nextPage,
-                            ),
-                    )),
+                                ),
+                              );
+                            },
+                          ),
+                  )
+                : ValueListenableBuilder<bool>(
+                    valueListenable: challengeController.advanceDisabledNotifier,
+                    builder: (context, value, _) => value
+                        ? NextButtonWidget.white(
+                            label: "Pular",
+                            onTap: nextPage,
+                          )
+                        : NextButtonWidget.green(
+                            label: "Avançar",
+                            onTap: nextPage,
+                          ),
+                  ),
+          ),
         ),
       ),
     );
